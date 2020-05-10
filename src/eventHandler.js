@@ -1,9 +1,9 @@
 export const handleEvent = ({ offsetX, offsetY }) => {
   if (offsetY < 29) {
-    return {
-      type: "MENU",
-      realX: offsetX,
-    };
+    if (offsetX >= 100 && offsetX <= 140)
+      return {
+        type: "RUN",
+      };
   }
   if (offsetY > 29)
     return {

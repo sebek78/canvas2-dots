@@ -2,36 +2,23 @@ import "./styles.scss";
 import { handleEvent } from "./eventHandler";
 import processingState from "./processingState";
 import drawing from "./drawing";
-
-let state = {
-  start: Date.now(),
-  frames: 0,
-  fps: 0,
-  time: 0,
-};
+import { createState, createPopulation } from "./init.js";
 
 (function () {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
+
+  let state = createState();
+  let dots = createPopulation();
   let action = {};
-  let renderer = true;
 
   const loop = () => {
-    state = processingState(state, action);
+    state = processingState(state, action, dots);
     action = {};
-    drawing(ctx, state);
-    if (renderer) window.requestAnimationFrame(loop);
+    drawing(ctx, state, dots);
+    if (state.render) window.requestAnimationFrame(loop);
   };
 
   canvas.addEventListener("click", (e) => (action = handleEvent(e)), false);
-  canvas.addEventListener("mouseleave", () => (renderer = false), false);
-  canvas.addEventListener(
-    "mouseenter",
-    () => {
-      renderer = true;
-      window.requestAnimationFrame(loop);
-    },
-    false
-  );
   window.requestAnimationFrame(loop);
 })();
