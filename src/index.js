@@ -16,7 +16,7 @@ import { createState, createPopulation } from "./init.js";
     state = processingState(state, action, dots);
     action = {};
     drawing(ctx, state, dots);
-    if (state.render) window.requestAnimationFrame(loop);
+    window.requestAnimationFrame(loop);
   };
 
   canvas.addEventListener("click", (e) => (action = handleEvent(e)), false);

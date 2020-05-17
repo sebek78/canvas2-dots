@@ -10,7 +10,7 @@ export default function drawing(ctx, state, dots) {
   drawRunBtn(ctx);
   drawGeneration(ctx, state.generation);
   drawTarget(ctx, state);
-  dots.forEach((dot) => dot.draw(ctx));
+  dots.forEach((dot) => drawDot(ctx, dot));
 }
 
 function drawFPS(ctx, fps) {
@@ -40,3 +40,10 @@ function drawGeneration(ctx, num) {
   ctx.textBaseline = "middle";
   ctx.fillText(`Generation: ${num}`, 160, 15);
 }
+
+export const drawDot = (ctx, dot) => {
+  ctx.beginPath();
+  ctx.arc(dot.x, dot.y, 5, 0, Math.PI * 2);
+  ctx.fillStyle = "#000000";
+  ctx.fill();
+};

@@ -5,25 +5,20 @@ import {
   STEP,
   TARGET_X,
   TARGET_Y,
+  START_X,
+  START_Y,
 } from "./constants";
 
 export const createDot = () => {
   let dot = {};
-  dot.x = 100;
-  dot.y = 235;
+  dot.x = START_X;
+  dot.y = START_Y;
   dot.brain = createBrain();
   dot.lives = true;
   dot.fitness = null;
 
-  dot.draw = (ctx) => {
-    ctx.beginPath();
-    ctx.arc(dot.x, dot.y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = "#000000";
-    ctx.fill();
-  };
-
   dot.move = (index) => {
-    if (index >= BRAIN_SIZE || !dot.lives) return;
+    if (!dot.lives) return;
     let angle = dot.brain[index];
     let newX = Math.cos((angle * Math.PI) / 180) * STEP;
     let newY = Math.sin((angle * Math.PI) / 180) * STEP;

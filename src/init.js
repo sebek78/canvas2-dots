@@ -1,8 +1,8 @@
 import { createDot } from "./dot";
+import { POPULATION_SIZE } from "./constants";
 
 export const createState = () => {
   return {
-    render: true,
     start: Date.now(),
     frames: 0,
     fps: 0,
@@ -14,4 +14,4 @@ export const createState = () => {
 };
 
 export const createPopulation = () =>
-  Array.from({ length: 30 }, () => createDot());
+  Array.from({ length: POPULATION_SIZE }, () => createDot());
