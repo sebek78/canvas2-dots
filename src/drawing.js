@@ -6,6 +6,7 @@ import {
   START_X,
   START_Y,
 } from "./constants";
+import { obstacles } from "./obstacles";
 
 export default function drawing(ctx, state, dots) {
   clearCanvas(ctx);
@@ -15,6 +16,7 @@ export default function drawing(ctx, state, dots) {
   drawButton(ctx, state.running);
   drawGenerationNumber(ctx, state.generation);
   drawTarget(ctx, state);
+  drawObstacles(ctx, obstacles);
   dots.forEach((dot) => drawDot(ctx, dot));
   drawStart(ctx);
 }
@@ -75,4 +77,11 @@ export const drawDot = (ctx, dot) => {
   ctx.arc(dot.x, dot.y, 5, 0, Math.PI * 2);
   ctx.fillStyle = "#000000";
   ctx.fill();
+};
+
+const drawObstacles = (ctx, obstacles) => {
+  obstacles.forEach((obs) => {
+    ctx.fillStyle = "#424242";
+    ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+  });
 };

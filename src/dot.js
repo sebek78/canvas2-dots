@@ -9,6 +9,7 @@ import {
   START_Y,
   MUTATION_RATE,
 } from "./constants";
+import { obstacleCollision } from "./obstacles";
 
 export const createDot = () => {
   let dot = createDotBody();
@@ -27,7 +28,7 @@ export const moveDot = (dot, index) => {
 export const updateDot = (dot) => {
   if (!dot.lives || dot.reachedGoal) return dot;
   const updatedDot = { ...dot };
-  if (outsideBoard(dot)) updatedDot.lives = false;
+  if (outsideBoard(dot) || obstacleCollision(dot)) updatedDot.lives = false;
   if (distance(dot) < 5) updatedDot.reachedGoal = true;
   updatedDot.steps += 1;
   return updatedDot;
