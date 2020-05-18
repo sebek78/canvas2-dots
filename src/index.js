@@ -1,6 +1,6 @@
 import "./styles.scss";
 import { handleEvent } from "./eventHandler";
-import processingState from "./processingState";
+import { processingState } from "./processingState";
 import drawing from "./drawing";
 import { createState, createPopulation } from "./init.js";
 
@@ -13,7 +13,7 @@ import { createState, createPopulation } from "./init.js";
   let action = {};
 
   const loop = () => {
-    state = processingState(state, action, dots);
+    [state, dots] = processingState(state, action, dots);
     action = {};
     drawing(ctx, state, dots);
     window.requestAnimationFrame(loop);

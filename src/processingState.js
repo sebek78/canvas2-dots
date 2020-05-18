@@ -1,45 +1,39 @@
 import { STEPS } from "./constants";
+import { moveDot, updateDot } from "./dot";
+import { naturalSelection, calcFitness, cloneMutation } from "./population";
 
-export default function processingState(state, action, dots) {
+export const processingState = (state, action, dots) => {
   let stateCopy = Object.assign({}, state);
-  stateCopy = addTimeUnit(stateCopy);
   stateCopy = calcFPS(stateCopy);
-  if (Object.keys(action).length !== 0) {
-    console.log(action);
+  if (action && Object.keys(action).length !== 0) {
     switch (action.type) {
       case "RUN":
+        if (stateCopy.generation >= 1 && !stateCopy.running) {
+          dots = calcFitness(dots);
+          dots = naturalSelection(dots);
+          dots = cloneMutation(dots);
+        }
+        if (!stateCopy.running) stateCopy.generation += 1;
         stateCopy.running = true;
+        break;
     }
   }
 
   if (stateCopy.running) {
-    dots.forEach((dot) => dot.move(state.index));
-    dots.forEach((dot) => dot.lives && dot.update());
-
+    dots = dots.map((dot) => moveDot(dot, state.index));
+    dots = dots.map((dot) => updateDot(dot));
     stateCopy.index += 1;
   }
   if (stateCopy.index >= STEPS) {
-    dots.forEach((dot) => dot.calcFitness());
     stateCopy.running = false;
     stateCopy.index = 0;
-    console.log(dots);
   }
-
-  return stateCopy;
-}
-
-const addTimeUnit = (state) =>
-  Object.assign({}, state, { time: state.time + 1 });
+  return [stateCopy, dots];
+};
 
 const calcFPS = (state) => {
   const time = Date.now();
-  if (time - state.start > 1000) {
-    return Object.assign({}, state, {
-      fps: state.frames,
-      frames: 0,
-      start: time,
-    });
-  } else {
-    return Object.assign({}, state, { frames: state.frames + 1 });
-  }
+  return time - state.start > 1000
+    ? { ...state, fps: state.frames, frames: 0, start: time }
+    : { ...state, frames: state.frames + 1 };
 };

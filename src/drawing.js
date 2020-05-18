@@ -1,17 +1,37 @@
-import { WIDTH, HEIGHT, TARGET_X, TARGET_Y } from "./constants";
+import {
+  WIDTH,
+  HEIGHT,
+  TARGET_X,
+  TARGET_Y,
+  START_X,
+  START_Y,
+} from "./constants";
 
 export default function drawing(ctx, state, dots) {
-  ctx.clearRect(0, 0, 640, 480);
-  ctx.fillStyle = "#000000";
-  ctx.fillRect(0, 0, WIDTH, 29);
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillRect(0, 30, WIDTH, HEIGHT);
+  clearCanvas(ctx);
+  drawMenu(ctx);
+  drawBoard(ctx);
   drawFPS(ctx, state.fps);
-  drawRunBtn(ctx);
-  drawGeneration(ctx, state.generation);
+  drawButton(ctx, state.running);
+  drawGenerationNumber(ctx, state.generation);
   drawTarget(ctx, state);
   dots.forEach((dot) => drawDot(ctx, dot));
+  drawStart(ctx);
 }
+
+const clearCanvas = (ctx) => {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+};
+
+const drawMenu = (ctx) => {
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(0, 0, WIDTH, 29);
+};
+
+const drawBoard = (ctx) => {
+  ctx.fillStyle = "#AEAEAE";
+  ctx.fillRect(0, 30, WIDTH, HEIGHT);
+};
 
 function drawFPS(ctx, fps) {
   ctx.font = "16px sans-serif";
@@ -27,18 +47,27 @@ const drawTarget = (ctx) => {
   ctx.fill();
 };
 
-function drawRunBtn(ctx) {
+const drawStart = (ctx) => {
+  ctx.beginPath();
+  ctx.arc(START_X, START_Y, 5, 0, Math.PI * 2);
+  ctx.fillStyle = "#0000FF";
+  ctx.fill();
+};
+
+function drawButton(ctx, running) {
   ctx.font = "16px sans-serif";
-  ctx.fillStyle = "lightblue";
   ctx.textBaseline = "middle";
-  ctx.fillText("Run", 100, 15);
+  const text = running ? "Running" : "Start";
+  const color = running ? "lightbule" : "lightgreen";
+  ctx.fillStyle = color;
+  ctx.fillText(text, 100, 15);
 }
 
-function drawGeneration(ctx, num) {
+function drawGenerationNumber(ctx, num) {
   ctx.font = "16px sans-serif";
   ctx.fillStyle = "lightblue";
   ctx.textBaseline = "middle";
-  ctx.fillText(`Generation: ${num}`, 160, 15);
+  ctx.fillText(`Generation: ${num}`, 190, 15);
 }
 
 export const drawDot = (ctx, dot) => {

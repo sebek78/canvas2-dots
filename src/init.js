@@ -6,10 +6,9 @@ export const createState = () => {
     start: Date.now(),
     frames: 0,
     fps: 0,
-    time: 0,
     index: 0,
     running: false,
-    generation: 1,
+    generation: 0,
   };
 };
 
