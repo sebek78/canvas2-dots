@@ -16,6 +16,14 @@ export const processingState = (state, action, dots) => {
         if (!stateCopy.running) stateCopy.generation += 1;
         stateCopy.running = true;
         break;
+      case "TOGGLE_OBSTACLE_1":
+        if (!stateCopy.running)
+          stateCopy.obstacles[0].isSet = !stateCopy.obstacles[0].isSet;
+        break;
+      case "TOGGLE_OBSTACLE_2":
+        if (!stateCopy.running)
+          stateCopy.obstacles[1].isSet = !stateCopy.obstacles[1].isSet;
+        break;
     }
   }
 

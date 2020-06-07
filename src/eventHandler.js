@@ -5,11 +5,15 @@ export const handleEvent = ({ offsetX, offsetY }) => {
         type: "RUN",
       };
     }
+    if (offsetX >= 410 && offsetX <= 435) {
+      return {
+        type: "TOGGLE_OBSTACLE_1",
+      };
+    }
+    if (offsetX >= 445 && offsetX <= 465) {
+      return {
+        type: "TOGGLE_OBSTACLE_2",
+      };
+    }
   }
-  if (offsetY > 29)
-    return {
-      type: "FIELD",
-      newX: offsetX,
-      newY: offsetY,
-    };
 };

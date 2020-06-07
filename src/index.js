@@ -7,6 +7,8 @@ import { createState, createPopulation } from "./init.js";
 (function () {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
+  ctx.font = "16px sans-serif";
+  ctx.textBaseline = "middle";
 
   let state = createState();
   let dots = createPopulation();

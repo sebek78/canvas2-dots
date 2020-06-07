@@ -19,7 +19,7 @@ export const createDot = () => {
 
 export const moveDot = (dot, index) => {
   if (!dot.lives || dot.reachedGoal) return dot;
-  let angle = dot.brain[index];
+  let angle = dot.brain[index]; // from 0 to 359 degree
   let newX = dot.x + Math.cos((angle * Math.PI) / 180) * STEP;
   let newY = dot.y + Math.sin((angle * Math.PI) / 180) * STEP;
   return { ...dot, x: newX, y: newY };

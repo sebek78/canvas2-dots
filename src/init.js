@@ -1,5 +1,6 @@
 import { createDot } from "./dot";
 import { POPULATION_SIZE } from "./constants";
+import { obstacles } from "./obstacles";
 
 export const createState = () => {
   return {
@@ -9,6 +10,7 @@ export const createState = () => {
     index: 0,
     running: false,
     generation: 0,
+    obstacles,
   };
 };
 

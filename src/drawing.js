@@ -15,6 +15,7 @@ export default function drawing(ctx, state, dots) {
   drawFPS(ctx, state.fps);
   drawButton(ctx, state.running);
   drawGenerationNumber(ctx, state.generation);
+  drawObstaclesMenu(ctx, state);
   drawTarget(ctx, state);
   drawObstacles(ctx, obstacles);
   dots.forEach((dot) => drawDot(ctx, dot));
@@ -36,9 +37,7 @@ const drawBoard = (ctx) => {
 };
 
 function drawFPS(ctx, fps) {
-  ctx.font = "16px sans-serif";
   ctx.fillStyle = "lightblue";
-  ctx.textBaseline = "middle";
   ctx.fillText(`FPS: ${fps}`, 10, 15);
 }
 
@@ -57,8 +56,6 @@ const drawStart = (ctx) => {
 };
 
 function drawButton(ctx, running) {
-  ctx.font = "16px sans-serif";
-  ctx.textBaseline = "middle";
   const text = running ? "Running" : "Start";
   const color = running ? "lightbule" : "lightgreen";
   ctx.fillStyle = color;
@@ -66,10 +63,17 @@ function drawButton(ctx, running) {
 }
 
 function drawGenerationNumber(ctx, num) {
-  ctx.font = "16px sans-serif";
   ctx.fillStyle = "lightblue";
-  ctx.textBaseline = "middle";
   ctx.fillText(`Generation: ${num}`, 190, 15);
+}
+
+function drawObstaclesMenu(ctx, state) {
+  ctx.fillStyle = "lightblue";
+  ctx.fillText("Obstacles:", 320, 15);
+  ctx.fillStyle = state.obstacles[0].isSet ? "lightblue" : " lightgreen";
+  ctx.fillText("1", 420, 15);
+  ctx.fillStyle = state.obstacles[1].isSet ? "lightblue" : " lightgreen";
+  ctx.fillText("2", 455, 15);
 }
 
 export const drawDot = (ctx, dot) => {
@@ -81,7 +85,9 @@ export const drawDot = (ctx, dot) => {
 
 const drawObstacles = (ctx, obstacles) => {
   obstacles.forEach((obs) => {
-    ctx.fillStyle = "#424242";
-    ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+    if (obs.isSet) {
+      ctx.fillStyle = "#424242";
+      ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+    }
   });
 };
