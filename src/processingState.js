@@ -1,6 +1,11 @@
 import { STEPS } from "./constants";
 import { moveDot, updateDot } from "./dot";
-import { naturalSelection, calcFitness, cloneMutation } from "./population";
+import {
+  naturalSelection,
+  calcFitness,
+  cloneMutation,
+  areAllDotsDead,
+} from "./population";
 
 export const processingState = (state, action, dots) => {
   let stateCopy = Object.assign({}, state);
@@ -32,6 +37,8 @@ export const processingState = (state, action, dots) => {
     dots = dots.map((dot) => updateDot(dot));
     stateCopy.index += 1;
   }
+  if (areAllDotsDead(dots)) stateCopy.index = STEPS;
+
   if (stateCopy.index >= STEPS) {
     stateCopy.running = false;
     stateCopy.index = 0;

@@ -40,3 +40,5 @@ const cloneDot = (parent) => {
 
 export const cloneMutation = (dots) =>
   dots.map((dot) => ({ ...dot, brain: mutation(dot.brain) }));
+
+export const areAllDotsDead = (dots) => dots.every((dot) => !dot.lives);
