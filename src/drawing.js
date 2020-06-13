@@ -1,6 +1,7 @@
 import {
   WIDTH,
   HEIGHT,
+  MENU_HEIGHT,
   TARGET_X,
   TARGET_Y,
   START_X,
@@ -32,8 +33,8 @@ const drawMenu = (ctx) => {
 };
 
 const drawBoard = (ctx) => {
-  ctx.fillStyle = "#AEAEAE";
-  ctx.fillRect(0, 30, WIDTH, HEIGHT);
+  ctx.fillStyle = "#CCC";
+  ctx.fillRect(0, MENU_HEIGHT, WIDTH, HEIGHT);
 };
 
 function drawFPS(ctx, fps) {
@@ -57,7 +58,7 @@ const drawStart = (ctx) => {
 
 function drawButton(ctx, running) {
   const text = running ? "Running" : "Start";
-  const color = running ? "lightbule" : "lightgreen";
+  const color = running ? "lightbule" : "yellowgreen";
   ctx.fillStyle = color;
   ctx.fillText(text, 100, 15);
 }
@@ -69,11 +70,11 @@ function drawGenerationNumber(ctx, num) {
 
 function drawObstaclesMenu(ctx, state) {
   ctx.fillStyle = "lightblue";
-  ctx.fillText("Obstacles:", 320, 15);
-  ctx.fillStyle = state.obstacles[0].isSet ? "lightblue" : " lightgreen";
-  ctx.fillText("1", 420, 15);
-  ctx.fillStyle = state.obstacles[1].isSet ? "lightblue" : " lightgreen";
-  ctx.fillText("2", 455, 15);
+  ctx.fillText("Obstacles:", 340, 15);
+  ctx.fillStyle = state.obstacles[0].isSet ? "lightblue" : "yellowgreen";
+  ctx.fillText("1", 440, 15);
+  ctx.fillStyle = state.obstacles[1].isSet ? "lightblue" : "yellowgreen";
+  ctx.fillText("2", 475, 15);
 }
 
 export const drawDot = (ctx, dot) => {

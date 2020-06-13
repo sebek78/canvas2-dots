@@ -1,8 +1,7 @@
-import { HEIGHT } from "./constants";
+import { HEIGHT, MENU_HEIGHT } from "./constants";
 
 const OBSTACLE_LENGTH = 160;
 const OBSTACLE_WIDTH = 30;
-const MENU_HEIGHT = 30;
 
 export const obstacles = [
   {

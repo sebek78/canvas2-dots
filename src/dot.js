@@ -8,6 +8,7 @@ import {
   START_X,
   START_Y,
   MUTATION_RATE,
+  MENU_HEIGHT,
 } from "./constants";
 import { obstacleCollision } from "./obstacles";
 
@@ -38,7 +39,7 @@ export const distance = (dot) =>
   Math.sqrt(Math.pow(TARGET_X - dot.x, 2) + Math.pow(TARGET_Y - dot.y, 2));
 
 const outsideBoard = (dot) =>
-  dot.x <= 0 || dot.x >= WIDTH || dot.y <= 30 || dot.y >= HEIGHT;
+  dot.x <= 0 || dot.x >= WIDTH || dot.y <= MENU_HEIGHT || dot.y >= HEIGHT;
 
 const randomAngle = () => Math.random() * 360;
 
