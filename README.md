@@ -15,5 +15,3 @@ Population size: 180
 Mutation rate: 0.01
 "Brain" size: 400 (randomly generated angles)
 Move: 10 (pixels per simulation step)
-
-[Live version](http://mybytes.pl/projects/dots/)
